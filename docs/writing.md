@@ -113,19 +113,16 @@ Using SYCL, you can verify if you have access to the different features:
             }
 
             std::cout << "add two vectors of size " << kVectSize << std::endl;
-            {
             
-              q.memcpy(vec_a, host_vec_a, kVectSize * sizeof(int)).wait();
-              q.memcpy(vec_b, host_vec_b, kVectSize * sizeof(int)).wait();
+            q.memcpy(vec_a, host_vec_a, kVectSize * sizeof(int)).wait();
+            q.memcpy(vec_b, host_vec_b, kVectSize * sizeof(int)).wait();
 
 
 
-              q.single_task<VectorAddID>([=]() {
-                  VectorAdd(vec_a, vec_b, vec_c, kVectSize);
-                }).wait();
-            }
-            // result is copied back to host automatically when accessors go out of
-            // scope.
+            q.single_task<VectorAddID>([=]() {
+                VectorAdd(vec_a, vec_b, vec_c, kVectSize);
+              }).wait();
+
             q.memcpy(host_vec_c, vec_c, kVectSize * sizeof(int)).wait();
 
             // verify that VC is correct
@@ -182,10 +179,10 @@ Buffers and accessors are key abstractions that enable memory management and dat
 
         class Kernel;
         constexpr int N = 100;
-        std::array<int,N> in;
-        std::array<int,N> out;
+        std::array<int,N> in_array;
+        std::array<int,N> out_array;
         for (int i = 0 ; i <N; i++)
-            in[i] = i+1;
+            in_array[i] = i+1;
         queue device_queue(sycl::ext::intel::fpga_selector_v);
 
         { // This one is very important to define the buffer scope
@@ -303,7 +300,7 @@ Like for OpenCL, you can manage dependencies explicitly using events.
       });
       // Task D
       device_queue.submit([&](handler &h) {
-      h.depends_on({eB, eC});
+      h.depends_on({event_B, event_C});
       h.parallel_for(N, [=](id<1> i) { /*...*/ });
       }).wait();
       ...

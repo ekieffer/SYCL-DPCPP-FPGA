@@ -1,6 +1,6 @@
 # What is the Intel® oneAPI DPC++ compiler
 
-In heterogenous computing, accelerator devices support the host processor by executing specific portion of code more efficiently. In this context, the Intel® oneAPI toolkit supports two different approach for heterogeous computing:
+In heterogenous computing, accelerator devices support the host processor by executing specific portion of code more efficiently. In this context, the Intel® oneAPI toolkit supports two different approaches for heterogeous computing:
 
 
 !!! abstract "1. Data Parallel C++ with SYCL" 

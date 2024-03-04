@@ -68,7 +68,7 @@ Execution does not require the hardware compiler [Quartus Prime](https://www.int
 ```bash
 [fpga_session]$ module purge
 [fpga_session]$ module load 520nmx/20.4
-# Don't forget to comment the next command if you have started a new tmux/screen session
+# Don't forget to uncomment the next command if you have started a new tmux/screen session
 #[fpga_session]$ module use /project/home/p200117/apps/u100057/easybuild/modules/all
 [fpga_session]$ module load intel-compilers/2023.2.1-fpga_execute
 ```

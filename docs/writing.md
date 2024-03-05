@@ -246,7 +246,7 @@ Contrary to OpenCL, queues in SYCL are out-of-order by default. Nonetheless, you
     <div style="width: 70%; float: left">
     ```cpp
       ... 
-      queue device_queue{sycl::ext::intel::fpga_selector_v};
+      queue device_queue{sycl::ext::intel::fpga_selector_v,{property::queue::in_order()}};
       // Task A
       device_queue.submit([&](handler& h) {
             h.single_task<TaskA>([=]() { });
